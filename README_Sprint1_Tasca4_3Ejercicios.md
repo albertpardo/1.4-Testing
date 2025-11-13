@@ -30,7 +30,7 @@ Verify its correct functionality with JUnit:
 
 ### Exercise 2
 
--   Create a class named CalculateDni that calculates the letter of the DNI when given the number as a parameter.
+-   Create a class titled CalculateDni that calculates the letter of the DNI when given the number as a parameter.
 -   Create a JUnit class that verifies its correct functionality by parameterizing it to receive a broad data spectrum and validate whether the calculation is correct for 10 predefined DNI numbers.
 
 ### Exercise 3
