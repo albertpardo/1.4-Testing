@@ -89,7 +89,7 @@ class BooksManagerTest {
         previousNumBooks = booksManager.getBookCollection().size();
         booksManager.addBook(new Book("Title 2"));
         newNumBooks = booksManager.getBookCollection().size();
-        assertTrue(previousNumBooks < newNumBooks, " Adding one book hasn´t modify book list");
+        assertTrue(previousNumBooks < newNumBooks, " Adding one book has not modify book list");
     }
 
     @Test
@@ -106,10 +106,28 @@ class BooksManagerTest {
         previousNumBooks = booksManager.getBookCollection().size();
         booksManager.deleteBookByTitle(title2);
         newNumBooks = booksManager.getBookCollection().size();
-        assertTrue(previousNumBooks > newNumBooks, " Deleting one book hasn´t modify book list");
+        assertTrue(previousNumBooks > newNumBooks, " Deleting one book has not modify book list");
+    }
 
+    @Test
+    @DisplayName("check book list is sorted after add or delete one book")
+    void check_book_list_is_sorted_after_add_or_delete_one_book(){
+        ArrayList<Book> testBooksList = new ArrayList<>();
+        testBooksList.add(new Book("Title 1"));
+        testBooksList.add(new Book("Title 40"));
 
+        BooksManager booksManager = new BooksManager();
+        booksManager.addBook(new Book("Title 40"));
+        booksManager.addBook(new Book("Title 1"));
+        assertEquals(testBooksList, booksManager.getBookCollection(), "Previous test to check add or delete a book fails: adding a two books in a empty list are not sort ");
 
+        testBooksList.add(new Book("Title 2"));
+        testBooksList.add(new Book("Title 4"));
+        testBooksList.add(new Book("Title 30"));
+
+        booksManager.addBook(new Book("Title 2"));
+        booksManager.addBook(new Book("Title 4"));
+        booksManager.addBook(new Book("Title 1"));
     }
 
 
