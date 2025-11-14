@@ -110,24 +110,32 @@ class BooksManagerTest {
     }
 
     @Test
-    @DisplayName("check book list is sorted after add or delete one book")
+    @DisplayName("check book list is sorted after add one book by ID or delete one book by tittle")
     void check_book_list_is_sorted_after_add_or_delete_one_book(){
         ArrayList<Book> testBooksList = new ArrayList<>();
         testBooksList.add(new Book("Title 1"));
+        testBooksList.add(new Book("Title 30"));
         testBooksList.add(new Book("Title 40"));
 
         BooksManager booksManager = new BooksManager();
+        booksManager.addBook(new Book("Title 30"));
         booksManager.addBook(new Book("Title 40"));
         booksManager.addBook(new Book("Title 1"));
-        assertEquals(testBooksList, booksManager.getBookCollection(), "Previous test to check add or delete a book fails: adding a two books in a empty list are not sort ");
+        assertEquals(testBooksList, booksManager.getBookCollection(), "Previous test to check add or delete a book fails: adding a three books in a empty list are not sort ");
 
-        testBooksList.add(new Book("Title 2"));
-        testBooksList.add(new Book("Title 4"));
-        testBooksList.add(new Book("Title 30"));
+        ArrayList<Book> testBooksList2 = new ArrayList<>();
+        testBooksList2.add(new Book("Title 1"));
+        testBooksList2.add(new Book("Title 30"));
+        testBooksList2.add(new Book("Title 35"));
+        testBooksList2.add(new Book("Title 40"));
 
-        booksManager.addBook(new Book("Title 2"));
-        booksManager.addBook(new Book("Title 4"));
-        booksManager.addBook(new Book("Title 1"));
+        String title = "Title 35";
+        booksManager.addBookById(0, new Book(title));
+        assertEquals(testBooksList2, booksManager.getBookCollection(), "the book list is not sorted after add a book by id! ");
+
+        booksManager.deleteBookByTitle(title);
+        assertEquals(testBooksList, booksManager.getBookCollection(), "the book list is not sorted after delete a book by title! ");
+
     }
 
 

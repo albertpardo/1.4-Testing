@@ -32,18 +32,35 @@ public class BooksManager {
     }
 
     public void addBookById(int id, Book book){
-        if (id > -1 || id < bookCollection.size()) {
-            System.out.println("TODO : addBookById");
+        if (id > -1) {
+            bookCollection.add(id, book);
+            Collections.sort(bookCollection);
         }
-        System.out.println(" Id = " + id + " out of range!");;
+        System.out.println(" Id must be great that 0");;
     }
 
     public void deleteBookByTitle(String title){
+        /*
         for (int i = 0; i < bookCollection.size(); i++){
             if (getBookById(i).getTitle().equalsIgnoreCase(title)) {
                 bookCollection.remove(i);
+                Collections.sort(bookCollection);
                 break;
             }
+        }
+        */
+        int i = 0;
+        boolean foundTitle = false;
+
+        while (i < bookCollection.size() && !foundTitle){
+            if (!getBookById(i).getTitle().equalsIgnoreCase(title))
+                i++;
+            else
+                foundTitle = true;
+        }
+        if (foundTitle) {
+            bookCollection.remove(i);
+            Collections.sort(bookCollection);
         }
     }
 }
